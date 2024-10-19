@@ -1,71 +1,129 @@
-<script lang='ts'>    
-    let inpH = 1
-    let inpT = 2
-    let inpE = 3
+<script lang='ts'>   
+   
+   import Button from "$lib/components/Button.svelte"
+   import {generateNumber} from "$lib/Helpers"
     
-    let outH = 1
-    let outT = 2
-    let outE = 3
+    // Main variables     
+   let status = $state('solving')
+   let divby = generateNumber(1)
+   let num =   generateNumber(3)
+
+    // Number breakdown
+    let numH = Math.floor(num/100)
+    let numT = Math.floor((num - numH * 100)/10)
+    let numE = num - numH * 100 - numT *10
     
-    // function generateNumber(len:number) {
-    //  return Array.from({length: len}, (_,i)=>{
-    //     return i == 0 ? Math.floor(Math.random()*9) + 1 : Math.floor(Math.random()*9)
-    //  })
-    // }
+    // Output variables
+    let outH = $state('')
+    let outT = $state('')
+    let outE = $state('')
+    let outR = $state('')
+
+    const Status  = {
+        Solving:  'solving',
+        InputError : 'inputError',
+        MissingInput : 'missingInput',
+        Correct : 'correct'
+}
+    let formStatus = $state(Status.Solving)
     
-    // console.log(generateNumber(3).join('/'))
+ $effect(()=>{
+    console.log(outH, outT, outE, outR)
+    if (!outH || !outT || !outE) {
+        formStatus = Status.MissingInput
+    } else {
+        formStatus = Status.Solving
+    }
+ })
+    
+    // Grid for input
+    const grid = Array.from({length: 6}, ()=>0)
+
+
     </script>
     
-    <h1>Challenge</h1>
-    
-    
-    <div class="grid">
-        <input style:grid-column=1 style:grid-row=1 value=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <span style:grid-column=2 style:grid-row=1 >/</span>
-        <input class="inp" style:grid-column=3 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <span  style:grid-column=6 style:grid-row=1 >\</span>
-        <input class="outp" style:grid-column=7 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="outp" style:grid-column=8 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="outp"style:grid-column=9 style:grid-row=1   type="number" step="any" inputmode="numeric" pattern="[0-9]"/>  
-        <input class='remainder' style:grid-column=10 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-    
-    
-        <input class="inp" style:grid-column=3 style:grid-row=2  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=2 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=2  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-       
-        <input class="inp" style:grid-column=3 style:grid-row=3  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=3 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=3  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-       
-        <input class="inp" style:grid-column=3 style:grid-row=4  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=4 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=4  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-       
-        <input class="inp" style:grid-column=3 style:grid-row=5  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=5 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=5  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-       
-        <input class="inp" style:grid-column=3 style:grid-row=6  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=6 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=6  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-       
-        <input class="inp" style:grid-column=3 style:grid-row=7  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=4 style:grid-row=7 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-        <input class="inp" style:grid-column=5 style:grid-row=7  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-       
-    
+<div class="container">
+    <h1 class="title">Challenge</h1>
+    <!-- <button on:click={checkInput}></button> -->
+
+    {#if status === 'inputError' }
+        <h1 class="error">Incorrect</h1> 
+        <p class="error">Provide all answers in red</p>
+    {/if}
+
+    {#if status === Status.Solving }
+    <div class="flex">
+        <div style:width=500px>
+            <h1 >Divide {num} by {divby}</h1> 
+            <p >Use grid to solve the problem. Once you have the answer, type it in the red box and click Check.</p>
+        </div>
+        {#if formStatus === Status.Solving}
+        <div>
+            <Button>Check</Button>
+        </div>
+    {/if}
     </div>
+    {/if}
+
+    <!-- Number breakdown -->
+
+    <form class="grid" >
+            <input disabled value= {divby} style:grid-column=1 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <span  style:grid-column=2 style:grid-row=1 >/</span>
+            <input disabled value={numH} class="inp" style:grid-column=3 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input disabled value={numT} class="inp" style:grid-column=4 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input disabled value={numE} class="inp" style:grid-column=5 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <span  style:grid-column=6 style:grid-row=1 >\</span>
+            <input class={status === 'inputError' ? 'error' : ''} bind:value={outH}  style:grid-column=7 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={status === 'inputError' ? 'error' : ''} bind:value={outT}  style:grid-column=8 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={status === 'inputError' ? 'error' : ''} bind:value={outE}  style:grid-column=9 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>  
+            <input class={status === 'inputError' ? 'error' : ''} bind:value={outR}  style:grid-column=10 style:grid-row=1 style:margin-left=10px type="number" step="any" inputmode="numeric" pattern="\d*" id="outR"/>
+
     
+            {#each grid as cell, i}
+                <input class="inp" style:grid-column=3 style:grid-row={i+1+1}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+                <input class="inp" style:grid-column=4 style:grid-row={i+1+1}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+                <input class="inp" style:grid-column=5 style:grid-row={i+1+1}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            {/each}
+      
+        
+    </form>
+</div>
+   
+       
     <style>
+
+    :root  {
+            --background-clr: #212121;
+            --accent-clr : mediumspringgreen;
+            --text-clr: #fff;
+            background-color: var(--background-clr);
+            color: var(--text-clr);
+    }
+    .flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    .error {
+        color:  red;
+    }
+    .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    form {
+        margin: 0 auto;
+    }
+
      .remainder{
         margin-left: 40px;
         background-color: aqua;   
      }
       
-     
      
      .grid {
             display: grid;
@@ -77,8 +135,10 @@
             font-size: x-large;
         }
     
-        h1 {
-            color: red;
+        .title {
+            color:var(--accent-clr);
+            font-size: 5rem;
+            text-align: center;
         }
     
         input {
