@@ -2,51 +2,74 @@
    
    import Button from "$lib/components/Button.svelte"
    import {generateNumber} from "$lib/Helpers"
-    
-    // Main variables     
+   import { createEventDispatcher } from "svelte"; 
+   import { Status } from "$lib/Constants"
+   import { generateGrid } from "$lib/Helpers"
+
+   let dispatch = createEventDispatcher()
+   
+   // Main variables     
    let status = $state('solving')
-   let divby = generateNumber(1)
-   let num =   generateNumber(3)
+   let divby = $state(generateNumber(1))
+   let num =   $state(generateNumber(3))
 
     // Number breakdown
-    let numH = Math.floor(num/100)
-    let numT = Math.floor((num - numH * 100)/10)
-    let numE = num - numH * 100 - numT *10
+    let numH = $derived(Math.floor(num/100))
+    let numT = $derived(Math.floor((num - numH * 100)/10))
+    let numE = $derived(num - numH * 100 - numT *10)
     
     // Output variables
-    let outH = $state('')
-    let outT = $state('')
-    let outE = $state('')
-    let outR = $state('')
+    let inpH = $state('')
+    let inpT = $state('')
+    let inpE = $state('')
+    let inpR = $state('')
 
-    const Status  = {
-        Solving:  'solving',
-        InputError : 'inputError',
-        MissingInput : 'missingInput',
-        Correct : 'correct'
-}
     let formStatus = $state(Status.Solving)
+
+    // Grid for drafting 
+    let grid  = $state(generateGrid(6, 3))
     
- $effect(()=>{
-    console.log(outH, outT, outE, outR)
-    if (!outH || !outT || !outE) {
+    $effect(()=>{
+        if (typeof(inpH) !== 'number' || typeof(inpT) !== 'number' || typeof(inpE) !== 'number' || typeof(inpR) !== 'number'    ) {
         formStatus = Status.MissingInput
     } else {
-        formStatus = Status.Solving
-    }
- })
+            formStatus = Status.Solving
+        }
+    })
     
-    // Grid for input
-    const grid = Array.from({length: 6}, ()=>0)
 
+
+    function checkAnswer() {
+        if (formStatus !== Status.Solving) return
+        if ((inpH * 100 + inpT * 10 + inpE ) * divby + inpR === num) {
+            formStatus = Status.Correct
+            dispatch('correct')
+        } else {
+            formStatus = Status.Incorrect
+            dispatch('incorrect')
+        }
+    }
+    
+    function restartChallenge() {
+        formStatus = Status.Solving
+        divby = generateNumber(1)
+        num =  generateNumber(3)
+        grid = generateGrid(6, 3)
+     
+        inpH = ''
+        inpT = ''
+        inpE = ''
+        inpR = ''
+    
+    }
+    
 
     </script>
     
 <div class="container">
     <h1 class="title">Challenge</h1>
-    <!-- <button on:click={checkInput}></button> -->
 
-    {#if status === 'inputError' }
+    {#if status === Status.Incorrect }
         <h1 class="error">Incorrect</h1> 
         <p class="error">Provide all answers in red</p>
     {/if}
@@ -59,12 +82,19 @@
         </div>
         {#if formStatus === Status.Solving}
         <div>
-            <Button>Check</Button>
+            <Button on:click={checkAnswer}>Check</Button>
         </div>
     {/if}
     </div>
     {/if}
 
+    {#if formStatus === Status.Correct}
+        <h1 class="correct">Correct !!!!!!</h1>
+    {/if}
+    {#if formStatus === Status.Incorrect}
+        <h1 class="incorrect">Incorrect</h1>
+        <Button on:click={restartChallenge}>Retry</Button>
+    {/if}
     <!-- Number breakdown -->
 
     <form class="grid" >
@@ -74,16 +104,14 @@
             <input disabled value={numT} class="inp" style:grid-column=4 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
             <input disabled value={numE} class="inp" style:grid-column=5 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
             <span  style:grid-column=6 style:grid-row=1 >\</span>
-            <input class={status === 'inputError' ? 'error' : ''} bind:value={outH}  style:grid-column=7 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input class={status === 'inputError' ? 'error' : ''} bind:value={outT}  style:grid-column=8 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input class={status === 'inputError' ? 'error' : ''} bind:value={outE}  style:grid-column=9 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>  
-            <input class={status === 'inputError' ? 'error' : ''} bind:value={outR}  style:grid-column=10 style:grid-row=1 style:margin-left=10px type="number" step="any" inputmode="numeric" pattern="\d*" id="outR"/>
-
-    
-            {#each grid as cell, i}
-                <input class="inp" style:grid-column=3 style:grid-row={i+1+1}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-                <input class="inp" style:grid-column=4 style:grid-row={i+1+1}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-                <input class="inp" style:grid-column=5 style:grid-row={i+1+1}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={formStatus} bind:value={inpH}  style:grid-column=7 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={formStatus} bind:value={inpT}  style:grid-column=8 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={formStatus} bind:value={inpE}  style:grid-column=9 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>  
+            <input class={'remainder ' + formStatus} bind:value={inpR}  style:grid-column=10 style:grid-row=1 style:margin-left=10px type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            {#each grid as row, i}           
+                {#each row as cell, j}
+                    <input class="inp" bind:value={grid[i][j]} style:grid-column={3+j} style:grid-row={2+i}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+                {/each}
             {/each}
       
         
@@ -100,12 +128,16 @@
             background-color: var(--background-clr);
             color: var(--text-clr);
     }
+    span {
+        margin: 0 10px;
+        font-size: 2rem;
+    }
     .flex {
         display: flex;
         justify-content: space-between;
     }
-    .error {
-        color:  red;
+    .missingInput, .inputError {
+        outline: 2px solid   red;
     }
     .container {
         position: relative;
@@ -148,7 +180,7 @@
     
         /* remove default increment bar */
         input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
+        input[type="number"]::-webkit-inpEr-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }

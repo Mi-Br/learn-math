@@ -11,3 +11,8 @@ export function generateNumber(len: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min; // Random number between `min` and `max`
     }
 } 
+
+
+export function generateGrid(rows: number, cols: number): string[][] {
+    return Array.from({length: rows}, ()=>Array.from({length: cols}, ()=>''))
+}
