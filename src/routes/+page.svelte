@@ -60,7 +60,7 @@
         inpT = ''
         inpE = ''
         inpR = ''
-    
+        dispatch('restart')
     }
     
 
