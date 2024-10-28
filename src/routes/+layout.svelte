@@ -1,11 +1,21 @@
 <script lang="ts">
+import './global.css'
 import {getUserData}  from '$lib/stores/userStore.svelte'
 import UserProfile from '$lib/components/UserProfile.svelte'    
-
+import Drawer from '$lib/components/Drawer.svelte'
 let {children} = $props()   
 const {name, score} = $derived(getUserData())
 </script>
-
+<Drawer open={false}>
+    <p>Drawer</p>
+    <p>Drawer</p>
+    <p>Drawer</p>
+    <p>Drawer</p>
+    <p>Drawer</p>
+    <p>Drawer</p>
+    <p>Drawer</p>
+    <p>Drawer</p>
+</Drawer>
 <nav>
     <a href="/"><i aria-label="home" class="fa-solid fa-house"></i>Home</a>
     <a href="/divisions">Divisions</a>
@@ -16,13 +26,7 @@ const {name, score} = $derived(getUserData())
 
 
 <style>
-:root  {
-            --background-clr: #212121;
-            --accent-clr : mediumspringgreen;
-            --text-clr: #fff;
-            background-color: var(--background-clr);
-            color: var(--text-clr);
-    }
+
 nav {
     background-color: var(--background-clr, #212121);
     padding: 1rem;
@@ -31,6 +35,7 @@ nav {
     align-items: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 
 nav a {
     color: var(--text-clr, #fff);
