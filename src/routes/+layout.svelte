@@ -1,21 +1,11 @@
 <script lang="ts">
 import './global.css'
 import {getUserData}  from '$lib/stores/userStore.svelte'
-import UserProfile from '$lib/components/UserProfile.svelte'    
+import UserProfile from '$lib/components/UserProfile.svelte'
 import Drawer from '$lib/components/Drawer.svelte'
-let {children} = $props()   
+let {children} = $props()
 const {name, score} = $derived(getUserData())
 </script>
-<Drawer open={false}>
-    <p>Drawer</p>
-    <p>Drawer</p>
-    <p>Drawer</p>
-    <p>Drawer</p>
-    <p>Drawer</p>
-    <p>Drawer</p>
-    <p>Drawer</p>
-    <p>Drawer</p>
-</Drawer>
 <nav>
     <a href="/"><i aria-label="home" class="fa-solid fa-house"></i>Home</a>
     <a href="/divisions">Divisions</a>
@@ -66,5 +56,5 @@ nav a i {
 
 
 
- 
+
 </style>

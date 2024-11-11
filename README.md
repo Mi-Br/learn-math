@@ -1,11 +1,29 @@
 # Create main layout, navigation and challenge routs
 
-
-
-
-# Create global store of correct/incorrect answers and points 
-
+# Create global store of correct/incorrect answers and points
 
 
 # Consistent design and style
-    - [ ] Try Skeleton
+    - [ ] Daisy UI
+
+# TODO
+- [ ] Fix layout in Divisions challenge
+
+
+# Ability to select user
+
+
+# Store points in local storage
+
+
+# New challenge - Multiplication
+
+
+# Add timer
+
+
+# Store stats ( completed, failed, retry state )
+
+
+
+? How does the animation work in svelte if I change svelte from A to B
