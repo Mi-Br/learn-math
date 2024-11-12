@@ -8,8 +8,12 @@
 
 # TODO
 - [x] Fix layout in Divisions challenge
-
-
+- [ ] Move succes/failure to toast notification component
+- [ ] Implement multiplications
+- [ ] Animate increment
+- [ ] Introduce hearts to track errors
+- [ ] Introduce progress bar to track time
+- [ ] 
 # Ability to select user
 
 

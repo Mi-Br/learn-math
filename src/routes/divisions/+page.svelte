@@ -69,27 +69,25 @@
 
     </script>
 
-<div class="container">
-    <h1 class="title">Divisions</h1>
 
     {#if status === Status.Incorrect }
         <h1 class="error">Incorrect</h1>
         <p class="error">Provide all answers in red</p>
     {/if}
 
-    <!-- {#if status === Status.Solving } -->
-    <div class="excersize-controls">
-        <div>
+    <div class="section">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl">
             <h1 class="challenge-title">Divide {num} by {divby}</h1>
             <p class="challenge-description">Use grid to solve the problem. Once you have the answer, type it in the red box and click Check.</p>
         </div>
-        <div class="cta-container"> 
+        <div class="cta-container">
             {#if formStatus === Status.Solving && formStatus !== Status.MissingInput}
                  <Button on:click={checkAnswer}>Check</Button>
             {/if}
 
             {#if formStatus === Status.Correct}
             <h1 class="correct">Correct !!!!!!</h1>
+            <Button on:click={restartChallenge}>Next</Button>
            {/if}
             {#if formStatus === Status.Incorrect}
             <h1 class="incorrect">Incorrect</h1>
@@ -97,36 +95,38 @@
                 <Button on:click={restartChallenge}>Next</Button>
             {/if}
         </div>
-      
+
     </div>
-    <!-- {/if} -->
 
     <!-- Number breakdown -->
 
-    <form class="grid" style="margin-top: 3rem;">
-            <input disabled value= {divby} style:grid-column=1 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+    <form class="grid" style="margin-top: 3rem;gap:.5rem;">
+            <input class="input text-2xl p-2 w-16" disabled value={divby} style:grid-column=1 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
             <span  style:grid-column=2 style:grid-row=1 >/</span>
-            <input disabled value={numH} class="inp" style:grid-column=3 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input disabled value={numT} class="inp" style:grid-column=4 style:grid-row=1 type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input disabled value={numE} class="inp" style:grid-column=5 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input disabled value={numH} class="input text-2xl p-2 w-16" style:grid-column=3 style:grid-row=1  type="number" step="any" />
+            <input disabled value={numH} class="input text-2xl p-2 w-16" style:grid-column=3 style:grid-row=1  type="number" step="any" />
+            <input disabled value={numT} class="input text-2xl p-2 w-16" style:grid-column=4 style:grid-row=1 type="number" step="any" />
+            <input disabled value={numE} class="input text-2xl p-2 w-16" style:grid-column=5 style:grid-row=1  type="number" step="any" />
             <span  style:grid-column=6 style:grid-row=1 >\</span>
-            <input class={formStatus} bind:value={inpH}  style:grid-column=7 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input class={formStatus} bind:value={inpT}  style:grid-column=8 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input class={formStatus} bind:value={inpE}  style:grid-column=9 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
-            <input class={'remainder ' + formStatus} bind:value={inpR}  style:grid-column=10 style:grid-row=1 style:margin-left=10px type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={'input input-bordered  text-2xl p-2 w-16 ' + formStatus} bind:value={inpH}  style:grid-column=7 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={'input input-bordered  text-2xl p-2 w-16 ' + formStatus} bind:value={inpT}  style:grid-column=8 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={'input input-bordered  text-2xl p-2 w-16 ' + formStatus} bind:value={inpE}  style:grid-column=9 style:grid-row=1  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+            <input class={'input input-bordered bg-secondary text-2xl p-2 w-16 ' + formStatus} bind:value={inpR}  style:grid-column=10 style:grid-row=1 style:margin-left=10px type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
             {#each grid as row, i}
                 {#each row as cell, j}
-                    <input class="inp" bind:value={grid[i][j]} style:grid-column={3+j} style:grid-row={2+i}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
+                    <input class="input input-bordered input-info text-2xl p-2 w-16" bind:value={grid[i][j]} style:grid-column={3+j} style:grid-row={2+i}  type="number" step="any" inputmode="numeric" pattern="[0-9]"/>
                 {/each}
             {/each}
     </form>
-</div>
-
 
     <style>
     /* * {outline: 1px solid red;} */
 
-   
+input{
+text-align: center;
+color: white;
+/* width: min-content; */
+}
 .challenge-title {
     font-size: 2rem;
     font-weight: 600;
@@ -138,7 +138,6 @@
 .challenge-description {
     font-size: 1.5rem;
     font-weight: 300;
-    color: var(--text-secondary-clr);
 }
     span {
         margin: 0 10px;
@@ -150,7 +149,7 @@
         align-items: center;
     }
     .missingInput, .inputError {
-        outline: 2px solid   red;
+        outline: 2px solid   rgba(153, 0, 255, 0.746);
     }
     .container {
         position: relative;
@@ -166,7 +165,6 @@
 
      .remainder{
         margin-left: 40px;
-        background-color: aqua;
      }
 
 
@@ -174,22 +172,7 @@
             display: grid;
             grid-template-columns: repeat(10, 1fr);
             max-width: min-content;
-        }
-
-        * {
-            font-size: x-large;
-        }
-
-        .title {
-            color:var(--accent-clr);
-            font-size: 5rem;
-            text-align: center;
-        }
-
-        input {
-            width: 1ch;
-            padding: 1em;
-        }
+    }
 
         /* remove default increment bar */
         input[type="number"]::-webkit-inner-spin-button,

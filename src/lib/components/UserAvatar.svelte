@@ -7,7 +7,4 @@
         <img src={avatar || 'src/avatars/avatar-1.svg'} alt="User Avatar" />
     </div>
 </div>
-<style>
-</style>
 
- 

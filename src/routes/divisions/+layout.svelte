@@ -4,18 +4,6 @@
 
 
 
-    <h1 class="title">Divisions</h1>
+<div class="container mx-auto">
     {@render children()}
-
-
-    <style>
-
-
-
-     .title {
-            color:var(--accent-clr);
-            font-size: 5rem;
-            text-align: center;
-        }
-
-    </style>
+</div>
