@@ -5,58 +5,21 @@ import UserProfile from '$lib/components/UserProfile.svelte'
 let {children} = $props()
 const {name, score} = $derived(getUserData())
 </script>
-<nav>
-    <a href="/"><i aria-label="home" class="fa-solid fa-house"></i>Home</a>
-    <a href="/divisions">Divisions</a>
-    <UserProfile name={name} score={score} style="margin-left: auto" />
-</nav>
-
+<div class="container mx-auto">
+    <nav class="navbar bg-base-300 text-neutral-content">
+        <ul class="menu menu-horizontal w-full">
+                <li><a href="/"><i aria-label="home" class="fa-solid fa-house"></i>Home</a></li>
+                <li><a href="/divisions">Divisions</a></li>
+            <div class="ml-auto">
+                <UserProfile name={name} score={score} />
+            </div>
+        </ul>
+    </nav>
+</div>  
+    <!-- 
 {@render children()}
 
 
 <style>
 
-nav {
-    background-color: var(--background-clr, #212121);
-    padding: 1rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-
-nav a {
-    color: var(--text-clr, #fff);
-    text-decoration: none;
-    margin-right: 1.5rem;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: var(--accent-clr, mediumspringgreen);
-}
-
-nav a i {
-    margin-right: 0.5rem;
-}
-
-.challenge-title {
-    color: var(--accent-clr, mediumspringgreen);
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-@media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    nav a {
-        margin: 0.5rem 0;
-    }
-}
-
-</style>
+</style> -->

@@ -2,16 +2,12 @@
     let {avatar ='', ...rest} = $props<{avatar: string}>()
 </script>
 
-<div class="user-avatar" {...rest}>
-    <img src={avatar || 'src/avatars/avatar-1.svg'} alt="User Avatar" />
+<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" {...rest}>
+    <div class="w-10 rounded-full">
+        <img src={avatar || 'src/avatars/avatar-1.svg'} alt="User Avatar" />
+    </div>
 </div>
-
-
 <style>
-    .user-avatar {
-        width: 50px;
-        height: 50px;
-    }
 </style>
 
  
