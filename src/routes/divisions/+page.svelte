@@ -58,6 +58,14 @@
         inpR = ''
     }
 
+    function retryChallenge() {
+        formStatus = Status.Solving
+        inpH = ''
+        inpT = ''
+        inpE = ''
+        inpR = ''
+    }
+
 
     </script>
 
@@ -69,27 +77,30 @@
         <p class="error">Provide all answers in red</p>
     {/if}
 
-    {#if status === Status.Solving }
-    <div class="flex">
-        <div style:width=500px>
-            <h1 >Divide {num} by {divby}</h1>
-            <p >Use grid to solve the problem. Once you have the answer, type it in the red box and click Check.</p>
-        </div>
-        {#if formStatus === Status.Solving && formStatus !== Status.MissingInput}
+    <!-- {#if status === Status.Solving } -->
+    <div class="excersize-controls">
         <div>
-            <Button on:click={checkAnswer}>Check</Button>
+            <h1 class="challenge-title">Divide {num} by {divby}</h1>
+            <p class="challenge-description">Use grid to solve the problem. Once you have the answer, type it in the red box and click Check.</p>
         </div>
-    {/if}
-    </div>
-    {/if}
+        <div class="cta-container"> 
+            {#if formStatus === Status.Solving && formStatus !== Status.MissingInput}
+                 <Button on:click={checkAnswer}>Check</Button>
+            {/if}
 
-    {#if formStatus === Status.Correct}
-        <h1 class="correct">Correct !!!!!!</h1>
-    {/if}
-    {#if formStatus === Status.Incorrect}
-        <h1 class="incorrect">Incorrect</h1>
-        <Button on:click={restartChallenge}>Retry</Button>
-    {/if}
+            {#if formStatus === Status.Correct}
+            <h1 class="correct">Correct !!!!!!</h1>
+           {/if}
+            {#if formStatus === Status.Incorrect}
+            <h1 class="incorrect">Incorrect</h1>
+                <Button on:click={retryChallenge}>Retry</Button>
+                <Button on:click={restartChallenge}>Next</Button>
+            {/if}
+        </div>
+      
+    </div>
+    <!-- {/if} -->
+
     <!-- Number breakdown -->
 
     <form class="grid" style="margin-top: 3rem;">
@@ -113,7 +124,22 @@
 
 
     <style>
+    /* * {outline: 1px solid red;} */
 
+   
+.challenge-title {
+    font-size: 2rem;
+    font-weight: 600;
+}
+.cta-container {
+    display: flex;
+    gap: 1rem;
+}
+.challenge-description {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--text-secondary-clr);
+}
     span {
         margin: 0 10px;
         font-size: 2rem;

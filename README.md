@@ -7,7 +7,7 @@
     - [ ] Daisy UI
 
 # TODO
-- [ ] Fix layout in Divisions challenge
+- [x] Fix layout in Divisions challenge
 
 
 # Ability to select user

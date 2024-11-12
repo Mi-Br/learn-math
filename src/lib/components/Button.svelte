@@ -3,14 +3,14 @@
 import {createEventDispatcher} from 'svelte'
 const dispatch = createEventDispatcher()
  const data = $props()
- 
 </script>
-<button class="button"  aria-label="action button" onclick={()=>dispatch('click')}>
+<button class="button"  aria-label="action button" on:click={()=>dispatch('click')}>
     {@render data.children()}
 </button>
 
 <style>
     .button {
+        display: inline;
         bottom: 0;
         right: 0;
         transform: translate(-50%, -50%);
@@ -22,7 +22,7 @@ const dispatch = createEventDispatcher()
         border: mediumspringgreen solid 0.15em;
         border-radius: 0.25em;
         color: mediumspringgreen;
-        font-size: 1.5em;
+        font-size: 1em;
         font-weight: 600;
         cursor: pointer;
         overflow: hidden;

@@ -2,20 +2,12 @@
             --background-clr: #212121;
             --accent-clr : mediumspringgreen;
             --text-clr: #fff;
+            --text-secondary-clr: #cccccc9d;
         background-color: var(--background-clr);
         color: var(--text-clr);
 }
 
-.visually-hidden:not(:focus):not(:active) {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0); /* Legacy property for Internet Explorer */
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-  
+
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-clr);
     margin-bottom: 1rem;
@@ -41,7 +33,7 @@ h3 {
 
 p {
     /* line-height: 1.6; */
-    margin-bottom: 1rem;
+ max-width: 50ch;
 }
 
 a {

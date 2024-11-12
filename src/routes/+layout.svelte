@@ -2,7 +2,6 @@
 import './global.css'
 import {getUserData}  from '$lib/stores/userStore.svelte'
 import UserProfile from '$lib/components/UserProfile.svelte'
-import Drawer from '$lib/components/Drawer.svelte'
 let {children} = $props()
 const {name, score} = $derived(getUserData())
 </script>
@@ -43,6 +42,12 @@ nav a i {
     margin-right: 0.5rem;
 }
 
+.challenge-title {
+    color: var(--accent-clr, mediumspringgreen);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 @media (max-width: 600px) {
     nav {
         flex-direction: column;
@@ -53,8 +58,5 @@ nav a i {
         margin: 0.5rem 0;
     }
 }
-
-
-
 
 </style>
