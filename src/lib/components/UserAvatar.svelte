@@ -1,6 +1,5 @@
 <script lang="ts">
-    let {avatar ='', ...rest} = $props<{avatar: string, onclick: () => void}>()
-    console.log(avatar)
+    let {avatar ='', ...rest} = $props<{avatar: string}>()
 </script>
 
 <div class="user-avatar" {...rest}>
@@ -10,8 +9,8 @@
 
 <style>
     .user-avatar {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
     }
 </style>
 
