@@ -2,7 +2,7 @@
 import './global.css'
 import {getUserData}  from '$lib/stores/userStore.svelte'
 import UserProfile from '$lib/components/UserProfile.svelte'
-import Toast from '$lib/components/components';
+import Toast from '$lib/components/Toast.svelte';
 let {children} = $props()
 const {name, score} = $derived(getUserData())
 </script>
