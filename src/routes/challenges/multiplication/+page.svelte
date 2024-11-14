@@ -55,11 +55,13 @@ let res:number =$state(0)
         </ChallengeControl>
 
         <div class="container mx-auto my-4">
-            <div class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center card-normal">{num}</div>
-            <div class="card bg-base-100 w-40 h-40 shadow-s text-5xl text-center">X</div>
-            <div class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center ">{numby}</div>
-            <div class="card bg-base-100 w-40 h-40 shadow-s text-5xl text-center">=</div>
-            <input bind:value={res} class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center "/>
+          
+                <div class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center card-normal">{num}</div>
+                <div class="card bg-base-100 w-40 h-40 shadow-s text-5xl text-center">X</div>
+                <div class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center ">{numby}</div>
+                <div class="card bg-base-100 w-40 h-40 shadow-s text-5xl text-center">=</div>
+                <input bind:value={res} class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center "/>
+           
         </div>
 
   </div>
@@ -76,19 +78,7 @@ let res:number =$state(0)
         gap: .1rem;
         width: max-content;
     }
-    form {
-        outline: 1px solid deeppink;
-        width: max-content;
-    }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-inpEr-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        /* Remove spinner for Firefox */
-        input[type="number"] {
-            -moz-appearance: textfield;
-        }
+   
 .challenge-title {
     font-size: 2rem;
     font-weight: 600;
