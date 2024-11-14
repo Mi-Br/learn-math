@@ -1,5 +1,6 @@
 <script lang='ts'>
    import Button from '$lib/components/Button.svelte'
+   import {ChallengeControl} from '$lib/components'
    import {generateNumber} from "$lib/Helpers"
    import { Status } from "$lib/Constants"
    import { generateGrid } from "$lib/Helpers"
@@ -80,7 +81,7 @@
             <h1 class="challenge-title">Divide {num} by {divby}</h1>
             <p class="challenge-description">Use grid to solve the problem. Once you have the answer, type it in the red box and click Check.</p>
         </div>
-        <div class="cta-container">
+        <!-- <div class="cta-container">
             {#if formStatus === Status.Solving && formStatus !== Status.MissingInput}
                  <Button on:click={checkAnswer}>Check</Button>
             {/if}
@@ -94,8 +95,13 @@
                 <Button on:click={retryChallenge}>Retry</Button>
                 <Button on:click={restartChallenge}>Next</Button>
             {/if}
-        </div>
-
+        </div> -->
+        <ChallengeControl
+                checkAnswer={checkAnswer}
+                restartChallenge={restartChallenge}
+                retryChallenge={retryChallenge}
+                currentStatus={formStatus}>
+        </ChallengeControl>
     </div>
 
     <!-- Number breakdown -->

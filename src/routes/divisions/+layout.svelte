@@ -3,7 +3,6 @@
 </script>
 
 
-
 <div class="container mx-auto">
     {@render children()}
 </div>

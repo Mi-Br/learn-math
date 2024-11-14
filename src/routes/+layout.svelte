@@ -11,6 +11,7 @@ const {name, score} = $derived(getUserData())
         <ul class="menu menu-horizontal w-full">
                 <li><a href="/"><i aria-label="home" class="fa-solid fa-house"></i>Home</a></li>
                 <li><a href="/divisions">Divisions</a></li>
+                <li><a href="/challenges/multiplication">Multiplication</a></li>
 
                 <div class="ml-auto mr-3">
                     <UserProfile name={name}/>

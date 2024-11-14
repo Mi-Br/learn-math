@@ -1,8 +1,8 @@
 <script lang="ts" module>
-        
-    let userScore = $state(100)
+
+    let userScore = $state(10)
     let userData = $state({
-        name: 'Adomas'
+        name: 'Benas'
     })
 
 
@@ -13,7 +13,7 @@
 
     export function getUserScore() {
         return userScore
-    }   
+    }
 
     export function getUserData() {
         return {...userData, score: userScore}
