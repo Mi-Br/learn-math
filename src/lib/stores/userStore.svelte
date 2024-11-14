@@ -8,7 +8,6 @@
 
     export function updateScore(score: number) {
         userScore += score
-        console.log(userScore)
     }
 
     export function getUserScore() {

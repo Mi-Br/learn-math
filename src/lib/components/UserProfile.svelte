@@ -4,7 +4,7 @@
 </script>
 
 <div {...rest} class="flex items-center gap-2">
-    <UserAvatar avatar="src/avatars/avatar-2.svg" />
+    <UserAvatar avatar="/avatars/avatar-6.svg" />
     <div>
         <p class="font-bold">{name}</p>
     </div>

@@ -16,3 +16,7 @@ export function generateNumber(len: number): number {
 export function generateGrid(rows: number, cols: number): string[][] {
     return Array.from({length: rows}, ()=>Array.from({length: cols}, ()=>''))
 }
+
+export function generateRandomNumberBetween(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

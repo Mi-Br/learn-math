@@ -12,10 +12,6 @@
 
     const {checkAnswer, restartChallenge, retryChallenge,currentStatus, ...rest}:ChallengeControlProps = $props()
 
-
-    $effect(() => {
-        console.log('currentStatus', currentStatus)
-    })
   </script>
         <div class="IdontKnowTailWind" {...rest}>
             {#if currentStatus === Status.Solving && currentStatus !== Status.MissingInput}

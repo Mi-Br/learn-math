@@ -2,7 +2,7 @@
 
 import {ChallengeControl} from '$lib/components'
 import { Status } from "$lib/Constants"
-import {generateNumber} from "$lib/Helpers"
+import {generateNumber, generateRandomNumberBetween} from "$lib/Helpers"
 import {updateScore} from '$lib/stores/userStore.svelte'
 
 const checkAnswer = () => {
@@ -26,12 +26,10 @@ const retryChallenge = () => {
 }
 let formStatus = $state(Status.Solving)
 
-
-let randomLen:number = $state(generateNumber(1))
+let randomLen:number = $state(generateRandomNumberBetween(2, 4))
 let num:number =   $state(generateNumber(randomLen))
 let numby:number = $state(generateNumber(1))
 let res:number =$state(0)
-
 
 
  $effect(()=>{

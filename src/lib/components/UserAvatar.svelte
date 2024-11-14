@@ -4,7 +4,7 @@
 
 <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar" {...rest}>
     <div class="w-10 rounded-full">
-        <img src={avatar || 'src/avatars/avatar-1.svg'} alt="User Avatar" />
+        <img src={avatar || '/avatars/avatar-1.svg'} alt="User Avatar" />
     </div>
 </div>
 
