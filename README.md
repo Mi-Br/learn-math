@@ -1,10 +1,16 @@
-# Create main layout, navigation and challenge routs
-
 # Create global store of correct/incorrect answers and points
 
-
 # Consistent design and style
-    - [ ] Daisy UI
+    - [x] Daisy UI
+
+# Add new challenges 
+
+# Create percent calculation challenge 
+
+# Create fraction simplification challenge
+
+# It should be possible to see history of challenges, results and replay challenge 
+
 
 # TODO
 - [x] Fix layout in Divisions challenge
@@ -16,18 +22,12 @@
 - [ ] 
 # Ability to select user
 
-
 # Store points in local storage
 
-
-# New challenge - Multiplication
-
-
 # Add timer
-
 
 # Store stats ( completed, failed, retry state )
 
 
-
+? How does the row level security work in supabase?
 ? How does the animation work in svelte if I change svelte from A to B
