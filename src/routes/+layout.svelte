@@ -12,15 +12,17 @@ const {name, score} = $derived(getUserData())
                 <li><a href="/"><i aria-label="home" class="fa-solid fa-house"></i>Home</a></li>
                 <li><a href="/divisions">Divisions</a></li>
                 <li><a href="/challenges/multiplication">Multiplication</a></li>
-
-                <div class="ml-auto mr-3">
+                <div class="ml-auto"></div>
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+                <div class=" mr-3">
                     <UserProfile name={name}/>
                 </div>
                 <div class="grid place-content-center">
                     <div class="badge badge-secondary rounded-full w-12 h-12 grid place-content-center">
                         <div>{score}</div>
                     </div>
-                 </div>
+                </div>
         </ul>
     </nav>
     <div class="section my-3">
