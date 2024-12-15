@@ -23,7 +23,10 @@ const {name, score} = $derived(getUserData())
                  </div>
         </ul>
     </nav>
-    {@render children()}
+    <div class="section my-3">
+        {@render children()}
+
+    </div>
     <Toast></Toast>
 </div>
     <!--

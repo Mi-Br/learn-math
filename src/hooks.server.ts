@@ -17,5 +17,4 @@ const getUsers = async () => {
     return { data, error }
 }
 
-console.log(await getUsers())
 

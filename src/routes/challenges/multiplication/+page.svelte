@@ -61,9 +61,7 @@ let res:number =$state(0)
                 <div class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center ">{numby}</div>
                 <div class="card bg-base-100 w-40 h-40 shadow-s text-5xl text-center">=</div>
                 <input bind:value={res} class="card bg-base-300 w-40 h-40 shadow-xl text-5xl text-center "/>
-           
         </div>
-
   </div>
 
 

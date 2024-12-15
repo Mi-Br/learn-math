@@ -1520,12 +1520,15 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@supabase/supabase-js@^2.46.1",
         "npm:@sveltejs/adapter-auto@3",
         "npm:@sveltejs/kit@2",
         "npm:@sveltejs/vite-plugin-svelte@^4.0.0-next.6",
         "npm:@types/eslint@^9.6.0",
+        "npm:@types/node@^22.9.3",
         "npm:autoprefixer@^10.4.20",
         "npm:daisyui@^4.12.14",
+        "npm:dotenv@^16.4.5",
         "npm:eslint-config-prettier@^9.1.0",
         "npm:eslint-plugin-svelte@^2.36.0",
         "npm:eslint@9",

@@ -1,1 +1,6 @@
-<h1 class="title">Home</h1>
+
+<script>
+    import Authform from '$lib/components/Authform.svelte';
+</script>
+
+<Authform isRegistration={false} />
