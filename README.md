@@ -13,18 +13,26 @@
 
 
 # TODO
+ - [ ] Implement auth 
+
 - [x] Fix layout in Divisions challenge
+
 - [ ] Move succes/failure to toast notification component
 - [ ] Implement multiplications
 - [ ] Animate increment
 - [ ] Introduce hearts to track errors
-- [ ] Introduce progress bar to track time
-- [ ] 
+
+
 # Ability to select user
+ - [ ] User profile
+ - [ ] Login/register form
+ - [ ] Logout
+ 
 
 # Store points in local storage
 
 # Add timer
+- [ ] Introduce progress bar to track time
 
 # Store stats ( completed, failed, retry state )
 

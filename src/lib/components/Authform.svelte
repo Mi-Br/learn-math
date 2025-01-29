@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
     const { isRegistration } = $props();
 </script>
 
 <div class="container">
     <h1 class="text-2xl font-bold"> {isRegistration ? 'Register' : 'Login'} </h1>
-<form class="flex flex-col gap-2 my-4" method="POST" >
+  <form class="flex flex-col gap-2 my-4" method="POST">
        {#if isRegistration}
         <label class="input input-bordered flex items-center gap-2">
         <svg
@@ -61,8 +61,10 @@
       </label>
       {/if}
       <button type="submit" class="btn btn-outline  w-64">{isRegistration ? 'Register' : 'Login'}</button>
-</form>
+  </form>
+  
 </div>
+
 
 <style>
    .container {
